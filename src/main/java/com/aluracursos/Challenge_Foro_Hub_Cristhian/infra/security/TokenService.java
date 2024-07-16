@@ -28,10 +28,10 @@ public class TokenService {
                     .withIssuer("Foro Hub Cristhian")
                     .withSubject(usuario.getLogin())
                     .withClaim("id", usuario.getId())
-                    .withExpiresAt(fechaExpiracion())
+                    .withExpiresAt(fechaDeExpiracion())
                     .sign(algoritmo);
         } catch (JWTCreationException jwtCreationException) {
-            throw new RuntimeException("Error al generar el token", jwtCreationException);
+            throw new RuntimeException("Lo sentimos, ha ocurrido un error al generar al token", jwtCreationException);
         }
     }
 
@@ -56,7 +56,7 @@ public class TokenService {
         return verifier.getSubject();
     }
 
-    private Instant fechaExpiracion() {
+    private Instant fechaDeExpiracion() {
         return LocalDateTime.now().plusHours(4).toInstant(ZoneOffset.of("-06:00"));
     }
 }
